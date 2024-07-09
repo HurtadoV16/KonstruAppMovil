@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">KonstruApp</string>
+    <string name="default_web_client_id">135478377748-g112mueoq3gdalqoigst8irfos0r5ti4.apps.googleusercontent.com</string>
+    <string name="mi_google_maps_api_key">AIzaSyANUNVH5nIhSdmL5XgFYnI_dOSN9_eayrQ</string>
+
+
+    <string name="Item_Inicio">Inicio</string>
+    <string name="Item_Chats">Chats</string>
+    <string name="Item_vender">Vender</string>
+    <string name="Item_Mis_Anuncios">Mis Anuncios</string>
+    <string name="Item_Cuenta">Cuenta</string>
+
+    <string name="TituloRl">Titulo</string>
+
+    <string name="Ingresar_email">Ingresar con email</string>
+    <string name="Ingresar_google">Ingresar con google</string>
+
+    <string name="Txt_login">Login de usuario</string>
+    <string name="Et_email">Email</string>
+    <string name="Et_password">Contraseña</string>
+    <string name="Btn_ingresar">Ingresar</string>
+    <string name="Txt_no_cuenta">¿No tienes una cuenta?</string>
+    <string name="Txt_registrarme">REGISTRARME</string>
+
+    <string name="Txt_registro">Registro de usuario</string>
+    <string name="Et_r_password">Repetir contraseña</string>
+    <string name="Btn_registrar">Registrar</string>
+
+    <string name="Txt_perfil">Perfil de usuario</string>
+    <string name="Txt_informacion">Informacion:</string>
+    <string name="Txt_nombres">Nombres: </string>
+    <string name="Tv_nombres">Nombres completos</string>
+    <string name="Txt_email">Email: </string>
+    <string name="Tv_email">email@dominio.com</string>
+    <string name="Txt_nacimiento">Fecha de nac: </string>
+    <string name="Tv_nacimiento">dd/mm/aaaa</string>
+    <string name="Txt_miembro">Miembro desde: </string>
+    <string name="Tv_miembro">dd/mm/aaaa</string>
+    <string name="Txt_telefono">Telefono: </string>
+    <string name="Tv_telefono">9999999999</string>
+    <string name="Txt_estado_cuenta">Estado de cuenta: </string>
+    <string name="Tv_estado_cuenta">No verificado</string>
+
+    <string name="TxtOpciones">Opciones</string>
+    <string name="Btn_editar_perfil">Editar perfil</string>
+    <string name="Btn_cerrar_sesion">Cerrar sesión</string>
+
+    <string name="Txt_editar_p">Editar perfil</string>
+    <string name="Et_nombres">Nombres completos</string>
+    <string name="Et_f_nac">Fecha de nac.</string>
+    <string name="Cod_tef"> +00 </string>
+    <string name="Et_telefono">Teléfono</string>
+    <string name="Btn_actualizar">Actualizar</string>
+
+    <string name="Et_marca">Nombre de la marca</string>
+    <string name="Categoria">Categoria</string>
+    <string name="Condicion">Condicion</string>
+    <string name="Locacion">Locación</string>
+    <string name="Et_precio">Precio</string>
+    <string name="Et_titulo">Título</string>
+    <string name="Et_descripcion">Descripción</string>
+    <string name="Btn_crear_anuncio">Crear anuncio</string>
+
+    <string name="Txt_selec_ubicacion">Seleccione ubicación</string>
+    <string name="Btn_listo">Listo</string>
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

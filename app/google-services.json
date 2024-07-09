@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "135478377748",
+    "firebase_url": "https://konstruapp-default-rtdb.firebaseio.com",
+    "project_id": "konstruapp",
+    "storage_bucket": "konstruapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135478377748:android:b72cd0962fb7efc0b71601",
+        "android_client_info": {
+          "package_name": "com.Sena.konstruapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135478377748-am89681k7i7pai6juc31b7dk2fqacq6g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Sena.konstruapp",
+            "certificate_hash": "f82ab33ebc04ff0337b5fbf9b9a398dff6130814"
+          }
+        },
+        {
+          "client_id": "135478377748-g112mueoq3gdalqoigst8irfos0r5ti4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCusSiOy6lE_E_qCWJv_2M_5UcMdeetJOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135478377748-g112mueoq3gdalqoigst8irfos0r5ti4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
