@@ -10,12 +10,21 @@ object Constantes {
     const val anuncio_vendido = "Vendido"
 
     val categorias = arrayOf(
+        "Todos",
         "Ferreteria",
         "Construccion",
         "Pisos",
         "Pinturas",
 
     )
+    val categoriasIcono = arrayOf(
+        R.drawable.ic_categoria_todos,
+        R.drawable.ic_categoria_ferreteria,
+        R.drawable.ic_categoria_construccion,
+        R.drawable.ic_categoria_pisos,
+        R.drawable.ic_categoria_pinturas,
+    )
+
     val condiciones = arrayOf(
         "Nuevo",
         "Usado"
