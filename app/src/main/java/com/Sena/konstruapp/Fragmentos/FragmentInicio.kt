@@ -7,6 +7,8 @@ import android.content.SharedPreferences
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -75,7 +77,7 @@ class FragmentInicio : Fragment() {
             seleccionarUbicacionARL.launch(intent)
         }
 
-        /*binding.EtBuscar.addTextChangedListener(object : TextWatcher{
+        binding.EtBuscar.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -103,7 +105,7 @@ class FragmentInicio : Fragment() {
                 Toast.makeText(context,"No se ha ingresado una consulta",Toast.LENGTH_SHORT).show()
             }
         }
-        */
+
     }
     private val seleccionarUbicacionARL = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()){ resultado->

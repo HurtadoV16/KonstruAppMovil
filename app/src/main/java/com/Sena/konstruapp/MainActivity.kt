@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         fragmentTransition.commit()
     }
     private fun verFragmentMisAnuncios(){
-        binding.TituloRl.text= "Mis Anuncios"
+        binding.TituloRl.text= "Anuncios"
         val fragment = FragmentMisAnuncios()
         val fragmentTransition = supportFragmentManager.beginTransaction()
         fragmentTransition.replace(binding.FragmentL1.id, fragment, "FragmentMisAnuncios")

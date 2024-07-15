@@ -7,7 +7,7 @@
     <string name="Item_Inicio">Inicio</string>
     <string name="Item_Chats">Chats</string>
     <string name="Item_vender">Vender</string>
-    <string name="Item_Mis_Anuncios">Mis Anuncios</string>
+    <string name="Item_Mis_Anuncios">Anuncios</string>
     <string name="Item_Cuenta">Cuenta</string>
 
     <string name="TituloRl">Titulo</string>
@@ -77,7 +77,24 @@
     <string name="Tv_precio">00</string>
     <string name="Tv_fecha">dd/MM/yyyy</string>
 
+    <string name="Txt_detalle_info">Detalle del anuncio</string>
+    <string name="Tv_cat">Categoría del anuncio</string>
+    <string name="Txt_titulo">Titulo</string>
+    <string name="Txt_descripcion">Descripción</string>
+    <string name="Tv_descr">Descripción del anuncio</string>
+    <string name="Txt_direccion">Dirección</string>
+    <string name="Txt_vistas">Número de visitas del anuncio: </string>
+    <string name="Tv_vistas">0</string>
+    <string name="Txt_descr_vendedor">Descripción del vendedor</string>
+    <string name="Txt_estado">Estado</string>
+    <string name="Tv_estado">Disponible</string>
 
+    <string name="Btn_mapa">Mapa</string>
+    <string name="Btn_llamar">Llam.</string>
+    <string name="Btn_sms">SMS</string>
+    <string name="Btn_chat">Chat</string>
+
+    <string name="imagenContadorTv">1/4</string>
 
 
 

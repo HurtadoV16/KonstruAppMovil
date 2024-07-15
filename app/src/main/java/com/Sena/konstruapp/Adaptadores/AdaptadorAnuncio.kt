@@ -1,6 +1,7 @@
 package com.Sena.konstruapp.Adaptadores
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,8 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.Sena.konstruapp.Constantes
+import com.Sena.konstruapp.DetalleAnuncio.DetalleAnuncio
+import com.Sena.konstruapp.Filtro.FiltrarAnuncio
 import com.Sena.konstruapp.Modelo.ModeloAnuncio
 import com.Sena.konstruapp.R
 import com.Sena.konstruapp.databinding.ItemAnuncioNuevaVersionBinding
@@ -26,12 +29,15 @@ class AdaptadorAnuncio :  RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio>, 
     private var context : Context
     var anuncioArrayList : ArrayList<ModeloAnuncio>
     private var firebaeAuth : FirebaseAuth
+    private var filtroLista : ArrayList<ModeloAnuncio>
+    private var filtro : FiltrarAnuncio?= null
+
 
     constructor(context: Context, anuncioArrayList: ArrayList<ModeloAnuncio>) {
         this.context = context
         this.anuncioArrayList = anuncioArrayList
         firebaeAuth = FirebaseAuth.getInstance()
-        //this.filtroLista = anuncioArrayList
+        this.filtroLista = anuncioArrayList
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderAnuncio {
@@ -58,13 +64,58 @@ class AdaptadorAnuncio :  RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio>, 
 
         cargarPrimeraImgAnuncio(modeloAnuncio,holder)
 
+        comprobarFavorito(modeloAnuncio, holder)
+
         holder.Tv_titulo.text = titulo
         holder.Tv_descripcion.text = descripcion
         holder.Tv_direccion.text = direccion
         holder.Tv_condicion.text = condicion
         holder.Tv_precio.text = precio
         holder.Tv_fecha.text = formatoFecha
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, DetalleAnuncio::class.java)
+            intent.putExtra("idAnuncio", modeloAnuncio.id)
+            context.startActivity(intent)
+        }
+
+
+        holder.Ib_fav.setOnClickListener {
+            val favorito = modeloAnuncio.favorito
+
+            if (favorito){
+                //Favorito = true
+                Constantes.eliminarAnuncioFav(context, modeloAnuncio.id)
+            }else{
+                //Favorito = false
+                Constantes.agregarAnuncioFav(context, modeloAnuncio.id)
+            }
+        }
+
     }
+
+    private fun comprobarFavorito(modeloAnuncio: ModeloAnuncio, holder: AdaptadorAnuncio.HolderAnuncio) {
+        val ref = FirebaseDatabase.getInstance().getReference("Usuarios")
+        ref.child(firebaeAuth.uid!!).child("Favoritos").child(modeloAnuncio.id)
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val favorito = snapshot.exists()
+                    modeloAnuncio.favorito = favorito
+
+                    if (favorito){
+                        holder.Ib_fav.setImageResource(R.drawable.ic_anuncio_es_favorito)
+                    }else{
+                        holder.Ib_fav.setImageResource(R.drawable.ic_no_favorito)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+
+    }
+
     private fun cargarPrimeraImgAnuncio(modeloAnuncio: ModeloAnuncio, holder: AdaptadorAnuncio.HolderAnuncio) {
         val idAnuncio = modeloAnuncio.id
 
@@ -106,7 +157,11 @@ class AdaptadorAnuncio :  RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio>, 
 
 
     override fun getFilter(): Filter {
-        TODO("Not yet implemented")
+        if (filtro == null){
+            filtro = FiltrarAnuncio(this, filtroLista)
+        }
+        return filtro as FiltrarAnuncio
     }
 
 }
+
