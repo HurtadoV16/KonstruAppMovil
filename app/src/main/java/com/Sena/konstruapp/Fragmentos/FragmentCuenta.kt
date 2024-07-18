@@ -1,5 +1,6 @@
 package com.Sena.konstruapp.Fragmentos
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -19,8 +20,12 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import android.net.Uri
+import android.os.CountDownTimer
 import android.text.format.DateFormat
+import com.Sena.konstruapp.CambiarPassword
 import com.Sena.konstruapp.EditarPerfil
+import com.Sena.konstruapp.Eliminar_cuenta
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.Arrays
 import java.util.Calendar
 import java.util.HashMap
@@ -31,6 +36,7 @@ class FragmentCuenta : Fragment() {
     private lateinit var binding: FragmentCuentaBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var mContext : Context
+    private lateinit var progressDialog : ProgressDialog
 
     override fun onAttach(context: Context) {
         mContext = context
@@ -44,6 +50,12 @@ class FragmentCuenta : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        progressDialog = ProgressDialog(mContext)
+        progressDialog.setTitle("Espere por favor")
+        progressDialog.setCanceledOnTouchOutside(false)
+
+
         firebaseAuth = FirebaseAuth.getInstance()
         leerInfo()
 
@@ -51,13 +63,81 @@ class FragmentCuenta : Fragment() {
             startActivity(Intent(mContext, EditarPerfil::class.java))
         }
 
-        binding.BtnCerrarSesion.setOnClickListener {
-            firebaseAuth.signOut()
+        binding.BtnCambiarPass.setOnClickListener {
+            startActivity(Intent(mContext, CambiarPassword::class.java))
+        }
 
-            startActivity(Intent(mContext, OpcionesLogin::class.java))
-            activity?.finishAffinity()
+        binding.BtnVerificarCuenta.setOnClickListener {
+            verificarCuenta()
+        }
+
+        binding.BtnEliminarAnuncios.setOnClickListener {
+            val alertDialog = MaterialAlertDialogBuilder(mContext)
+            alertDialog.setTitle("Eliminar todos mis anuncios")
+                .setMessage("¿Estás seguro(a) de eliminar todos tus anuncios?")
+                .setPositiveButton("Eliminar"){dialog, which->
+                    eliminarTodosMiAnuncios()
+                }
+                .setNegativeButton("Cancelar"){dialog, which->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+
+        binding.BtnEliminarCuenta.setOnClickListener {
+            startActivity(Intent(mContext, Eliminar_cuenta::class.java))
+        }
+
+        binding.BtnCerrarSesion.setOnClickListener {
+            actualizarEstado()
+            cerrarSesion()
         }
     }
+
+    private fun actualizarEstado(){
+        val ref = FirebaseDatabase.getInstance().reference.child("Usuarios").child(firebaseAuth.uid!!)
+
+        val hashMap = HashMap<String, Any>()
+        hashMap["estado"] = "Offline"
+        ref!!.updateChildren(hashMap)
+    }
+
+    private fun cerrarSesion(){
+        object : CountDownTimer(3000, 1000){
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+
+            override fun onFinish() {
+                //Pasado 3 segundos se va a ejecutar estas líneas de código
+                firebaseAuth.signOut()
+                startActivity(Intent(mContext, OpcionesLogin::class.java))
+                activity?.finishAffinity()
+            }
+
+        }.start()
+    }
+
+
+    private fun eliminarTodosMiAnuncios() {
+        val miUid = firebaseAuth.uid
+        val ref = FirebaseDatabase.getInstance().getReference("Anuncios").orderByChild("uid").equalTo(miUid)
+        ref.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (ds in snapshot.children){
+                    ds.ref.removeValue()
+                }
+
+                Toast.makeText(mContext, "Se han eliminado todos sus anuncios",Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+
     private fun leerInfo() {
         val ref = FirebaseDatabase.getInstance().getReference("Usuarios")
         ref.child("${firebaseAuth.uid}")
@@ -106,16 +186,16 @@ class FragmentCuenta : Fragment() {
                         val esVerificado = firebaseAuth.currentUser!!.isEmailVerified
                         if (esVerificado){
                             //Si el usuario está verificado
-                            //binding.BtnVerificarCuenta.visibility = View.GONE
+                            binding.BtnVerificarCuenta.visibility = View.GONE
                             binding.TvEstadoCuenta.text = "Verificado"
                         }else{
                             //Si el usuario NO está verificado
-                            //binding.BtnVerificarCuenta.visibility = View.VISIBLE
+                            binding.BtnVerificarCuenta.visibility = View.VISIBLE
                             binding.TvEstadoCuenta.text = "No verificado"
                         }
                     }else{
                         //Usuario ingresó a la aplicación con una cuenta de Google
-                        //binding.BtnVerificarCuenta.visibility = View.GONE
+                        binding.BtnVerificarCuenta.visibility = View.GONE
                         binding.TvEstadoCuenta.text = "Verificado"
                     }
 
@@ -126,6 +206,32 @@ class FragmentCuenta : Fragment() {
                 }
             })
     }
+
+    private fun verificarCuenta(){
+        progressDialog.setMessage("Enviando instrucciones de verificación a su correo electrónico")
+        progressDialog.show()
+
+        firebaseAuth.currentUser!!.sendEmailVerification()
+            .addOnSuccessListener {
+                progressDialog.dismiss()
+                Toast.makeText(
+                    mContext,
+                    "Las instrucciones fueron enviadas a su correo registrado",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            .addOnFailureListener {e->
+                progressDialog.dismiss()
+                Toast.makeText(
+                    mContext,
+                    "${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
+
+    }
+
 
 
 }

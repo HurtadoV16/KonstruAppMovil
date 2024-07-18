@@ -43,6 +43,10 @@
 
     <string name="TxtOpciones">Opciones</string>
     <string name="Btn_editar_perfil">Editar perfil</string>
+    <string name="Btn_Cambiar_pass">Cambiar contraseña</string>
+    <string name="Btn_eliminar_anuncios">Eliminar mis anuncios</string>
+    <string name="Btn_eliminar_cuenta">Eliminar cuenta</string>
+    <string name="Btn_verificar_cuenta">Verificar cuenta</string>
     <string name="Btn_cerrar_sesion">Cerrar sesión</string>
 
     <string name="Txt_editar_p">Editar perfil</string>
@@ -96,7 +100,50 @@
 
     <string name="imagenContadorTv">1/4</string>
 
+    <string name="Txt_eliminar">¿Estás seguro(a) de eliminar la imagen?</string>
+    <string name="Btn_si">Si</string>
+    <string name="Btn_no">Cancelar</string>
 
+    <string name="Txt_marcar_vendido">¿Marcar como vendido el producto?</string>
+
+    <string name="Txt_perfil_vendedor">Perfil del vendedor</string>
+    <string name="Txt_anuncios">Anuncios publicados:</string>
+    <string name="Tv_num_anuncios">0</string>
+
+    <string name="Txt_comentarios">Comentarios</string>
+    <string name="Txt_agregar">Agregar un comentario</string>
+
+    <string name="Et_agregar_comentario">Escriba un comentario</string>
+    <string name="Btn_comentar">Comentar</string>
+
+    <string name="Tv_nombres_comentario">Nombres</string>
+    <string name="Tv_fecha_comentario">dd/MM/yyyy</string>
+    <string name="Tv_comentario">Comentario del usuario</string>
+
+    <string name="Txt_olvide_pass">He olvidado mi contraseña</string>
+    <string name="Tv_recuperar">Recuperar</string>
+    <string name="Txt_olvide_password">Olvidé mi contraseña</string>
+
+    <string name="Txt_instrucciones">¿Olvidó su contraseña? Ingrese su correo electrónico registrado.
+    Le enviaremos las instrucciones de recuperación</string>
+    <string name="Btn_enviar_instrucciones">Enviar</string>
+
+    <string name="Txt_cambiar_pass">Cambiar contraseña</string>
+    <string name="Txt_instr_cambio_pass">Su nueva contraseña debe ser diferente a la actual</string>
+    <string name="Et_password_actual">Contraseña actual</string>
+    <string name="Et_password_nueva">Contraseña nueva</string>
+    <string name="Et_password_nueva_r">Repita la nueva contraseña</string>
+    <string name="Btn_actualizar_pass">Actualizar</string>
+
+    <string name="Txt_nombre_vendedor_chat">Nombre del vendedor</string>
+    <string name="Txt_estado_chat">Online</string>
+    <string name="Et_mensaje_chat">Escriba algo</string>
+    <string name="Tv_tiempo_mensaje">dd/MM/yyyy hh:mm</string>
+    <string name="Btn_cerrar_visualizador">Cerrar</string>
+
+    <string name="Txt_eliminar_cuenta">Eliminar cuenta</string>
+    <string name="Txt_mensaje_eliminar">¿Estás seguro(a) que deseas eliminar tu cuenta?. Esta acción no se puede deshacer</string>
+    <string name="Btn_eliminar_mi_cuenta">Eliminar mi cuenta</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

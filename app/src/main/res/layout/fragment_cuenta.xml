@@ -21,11 +21,11 @@
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/Iv_perfil"
             android:layout_below="@+id/Txt_perfil"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
             android:src="@drawable/img_perfil"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="18dp"
@@ -152,17 +152,57 @@
             android:textAllCaps="true"
             app:icon="@drawable/ic_editar"
             android:layout_centerInParent="true"
-            android:layout_width="200dp"
+            android:layout_width="220dp"
+            android:layout_height="@dimen/m_button_height"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Btn_Cambiar_pass"
+            android:text="@string/Btn_Cambiar_pass"
+            android:layout_below="@+id/Btn_editar_perfil"
+            android:textAllCaps="true"
+            app:icon="@drawable/ic_password"
+            android:layout_centerInParent="true"
+            android:layout_width="220dp"
+            android:layout_height="@dimen/m_button_height"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Btn_verificar_cuenta"
+            android:text="@string/Btn_verificar_cuenta"
+            android:layout_below="@+id/Btn_Cambiar_pass"
+            android:textAllCaps="true"
+            app:icon="@drawable/ic_verificar"
+            android:layout_centerInParent="true"
+            android:layout_width="220dp"
+            android:layout_height="@dimen/m_button_height"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Btn_eliminar_anuncios"
+            android:text="@string/Btn_eliminar_anuncios"
+            android:layout_below="@+id/Btn_verificar_cuenta"
+            android:textAllCaps="true"
+            app:icon="@drawable/ic_eliminar_anuncios"
+            android:layout_centerInParent="true"
+            android:layout_width="220dp"
+            android:layout_height="@dimen/m_button_height"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Btn_eliminar_cuenta"
+            android:text="@string/Btn_eliminar_cuenta"
+            android:layout_below="@+id/Btn_eliminar_anuncios"
+            android:textAllCaps="true"
+            app:icon="@drawable/ic_eliminar_cuenta"
+            android:layout_centerInParent="true"
+            android:layout_width="220dp"
             android:layout_height="@dimen/m_button_height"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/Btn_cerrar_sesion"
             android:text="@string/Btn_cerrar_sesion"
-            android:layout_below="@id/Btn_editar_perfil"
+            android:layout_below="@id/Btn_eliminar_cuenta"
             android:textAllCaps="true"
             app:icon="@drawable/ic_salir"
             android:layout_centerInParent="true"
-            android:layout_width="200dp"
+            android:layout_width="220dp"
             android:layout_height="@dimen/m_button_height"/>
     </RelativeLayout>
 

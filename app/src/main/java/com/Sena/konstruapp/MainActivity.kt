@@ -1,9 +1,14 @@
 package com.Sena.konstruapp
 
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.Sena.konstruapp.Anuncios.CrearAnuncio
@@ -14,6 +19,8 @@ import com.Sena.konstruapp.Fragmentos.FragmentMisAnuncios
 import com.Sena.konstruapp.databinding.ActivityMainBinding
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 
 class MainActivity : AppCompatActivity() {
@@ -52,17 +59,20 @@ class MainActivity : AppCompatActivity() {
 
         }
         binding.FAB.setOnClickListener {
-            startActivity(Intent(this, CrearAnuncio::class.java))
-            /*val intent = Intent(this, CrearAnuncio::class.java)
+            val intent = Intent(this, CrearAnuncio::class.java)
             intent.putExtra("Edicion", false)
-            startActivity(intent)*/
+            startActivity(intent)
         }
 
     }
+
     private fun comprobarSesion(){
         if (firebaseAuth.currentUser == null){
             startActivity(Intent(this, OpcionesLogin::class.java))
             finishAffinity()
+        }else{
+            agregarFcmToken()
+            solicitarPermisoNotificacion()
         }
     }
 
@@ -73,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         fragmentTransition.replace(binding.FragmentL1.id, fragment, "FragmentInicio")
         fragmentTransition.commit()
     }
+
     private fun verFragmentChats(){
         binding.TituloRl.text= "Chats"
         val fragment = FragmentChats()
@@ -80,6 +91,7 @@ class MainActivity : AppCompatActivity() {
         fragmentTransition.replace(binding.FragmentL1.id, fragment, "FragmentChats")
         fragmentTransition.commit()
     }
+
     private fun verFragmentMisAnuncios(){
         binding.TituloRl.text= "Anuncios"
         val fragment = FragmentMisAnuncios()
@@ -87,6 +99,7 @@ class MainActivity : AppCompatActivity() {
         fragmentTransition.replace(binding.FragmentL1.id, fragment, "FragmentMisAnuncios")
         fragmentTransition.commit()
     }
+
     private fun verFragmentCuenta(){
         binding.TituloRl.text= "Cuenta"
         val fragment = FragmentCuenta()
@@ -94,5 +107,73 @@ class MainActivity : AppCompatActivity() {
         fragmentTransition.replace(binding.FragmentL1.id, fragment, "FragmentCuenta")
         fragmentTransition.commit()
     }
+
+    private fun agregarFcmToken(){
+        val miUid = "${firebaseAuth.uid}"
+
+        FirebaseMessaging.getInstance().token
+            .addOnSuccessListener {fcmToken->
+                val hashMap = HashMap<String, Any>()
+                hashMap["fcmToken"] = "$fcmToken"
+                val ref = FirebaseDatabase.getInstance().getReference("Usuarios")
+                ref.child(miUid)
+                    .updateChildren(hashMap)
+                    .addOnSuccessListener {
+                        //El token se agregó con éxito
+                    }
+                    .addOnFailureListener {e->
+                        Toast.makeText(
+                            this,
+                            "${e.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+            }
+            .addOnFailureListener {e->
+                Toast.makeText(
+                    this,
+                    "${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+    }
+
+    private fun solicitarPermisoNotificacion(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) ==
+                PackageManager.PERMISSION_DENIED){
+                permisoNotificacion.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+    }
+
+    private val permisoNotificacion =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()){ esConcedido->
+            //Aqui se concede el permiso
+        }
+
+
+    private fun actualizarEstado(estado : String){
+       val firebaseUser = firebaseAuth.currentUser
+        if (firebaseUser!=null){
+            val ref = FirebaseDatabase.getInstance().reference.child("Usuarios").child(firebaseAuth.uid!!)
+            val hashMap = HashMap<String, Any>()
+            hashMap["estado"] = estado
+            ref!!.updateChildren(hashMap)
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        actualizarEstado("online")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        actualizarEstado("offline")
+    }
+
+
 
 }

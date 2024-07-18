@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.Sena.konstruapp.MainActivity
 import com.Sena.konstruapp.R
+import com.Sena.konstruapp.RecuperarPassword
 import com.Sena.konstruapp.Registro_email
 import com.Sena.konstruapp.databinding.ActivityLoginEmailBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -37,6 +38,10 @@ class Login_email : AppCompatActivity() {
         binding.TxtRegistrarme.setOnClickListener {
             startActivity(Intent(this@Login_email, Registro_email::class.java))
         }
+        binding.TvRecuperar.setOnClickListener {
+            startActivity(Intent(this@Login_email, RecuperarPassword::class.java))
+        }
+
 
     }
     private  var email = ""

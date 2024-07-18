@@ -2,6 +2,7 @@ package com.Sena.konstruapp.Adaptadores
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,6 +78,12 @@ class AdaptadorAnuncio :  RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio>, 
             val intent = Intent(context, DetalleAnuncio::class.java)
             intent.putExtra("idAnuncio", modeloAnuncio.id)
             context.startActivity(intent)
+        }
+
+        if (condicion.equals("Nuevo")){
+            holder.Tv_condicion.setTextColor(Color.parseColor("#48C9B0"))
+        }else if (condicion.equals("Usado")) {
+            holder.Tv_condicion.setTextColor(Color.parseColor("#5DADE2"))
         }
 
 

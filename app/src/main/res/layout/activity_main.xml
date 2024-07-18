@@ -10,12 +10,14 @@
     <RelativeLayout
         android:id="@+id/ToolbarRl"
         android:layout_width="match_parent"
+        android:background="@color/mi_color"
         android:layout_height="@dimen/m_toolbar_heihgt">
         <TextView
             android:id="@+id/TituloRl"
             android:text="@string/TituloRl"
             android:textStyle="bold"
             android:textSize="17sp"
+            android:textColor="#ffffff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"/>
@@ -49,10 +51,14 @@
         android:id="@+id/FAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:tint="@android:color/white"
+        android:backgroundTint="@color/mi_color_secundario"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
         android:src="@drawable/ic_agregar"
         />
+
+
 
 </RelativeLayout>

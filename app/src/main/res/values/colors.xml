@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="mi_color">#FD8102</color>
+    <color name="mi_color_secundario">#C1F88123</color>
 </resources>

@@ -1,5 +1,6 @@
 package com.Sena.konstruapp.Adaptadores
 
+import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import com.Sena.konstruapp.Modelo.ModeloImgSlider
 import com.Sena.konstruapp.R
 import com.Sena.konstruapp.databinding.ItemImagenSliderBinding
 import com.bumptech.glide.Glide
+import com.github.chrisbanes.photoview.PhotoView
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView
 
 
@@ -50,8 +53,37 @@ class AdaptadorImgSlider : RecyclerView.Adapter<AdaptadorImgSlider.HolderImagenS
         }
 
         holder.itemView.setOnClickListener {
-            //visualizadorImagen(modeloImagenSlider.imagenUrl)
+            visualizadorImagen(modeloImagenSlider.imagenUrl)
         }
+    }
+
+    private fun visualizadorImagen(imagen : String){
+        val Pv : PhotoView
+        val Btn_cerrar : MaterialButton
+
+        val dialog = Dialog(context)
+
+        dialog.setContentView(R.layout.cuadro_d_visualizador_img)
+
+        Pv = dialog.findViewById(R.id.Pv_img)
+        Btn_cerrar = dialog.findViewById(R.id.Btn_cerrar_visualizador)
+
+
+        try {
+            Glide.with(context)
+                .load(imagen)
+                .placeholder(R.drawable.imagen_chat)
+                .into(Pv)
+        }catch (e: Exception){
+
+        }
+
+        Btn_cerrar.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+        dialog.setCanceledOnTouchOutside(false)
     }
 
 

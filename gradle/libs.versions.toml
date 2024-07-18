@@ -18,6 +18,9 @@ ccpV="2.7.0"
 firebaseStorageV="21.0.0"
 mapasV="18.2.0"
 placesV="3.3.0"
+photoViewV="2.3.0"
+messagingV="23.4.1"
+circleImageV="3.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -36,6 +39,9 @@ ccp={group="com.hbb20", name="ccp", version.ref="ccpV"}
 firebaseStorage={group="com.google.firebase", name="firebase-storage", version.ref="firebaseStorageV"}
 mapas={group="com.google.android.gms", name="play-services-maps", version.ref="mapasV"}
 places={group="com.google.android.libraries.places", name="places", version.ref="placesV"}
+photoView={group="com.github.chrisbanes", name="PhotoView", version.ref="photoViewV"}
+messaging={group="com.google.firebase", name="firebase-messaging", version.ref="messagingV"}
+circleImage={group="de.hdodenhof", name="circleimageview", version.ref="circleImageV"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
